@@ -111,3 +111,31 @@ guide][overpass], [Open-Meteo forecast API][openmeteo-forecast], and
 [overpass]: https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL
 [openmeteo-forecast]: https://open-meteo.com/en/docs
 [openmeteo-elevation]: https://open-meteo.com/en/docs/elevation-api
+
+## 2026-10-07 — Phase 4 BirdNET route
+
+- Hardware remains the Phase 0 target: Apple M2 with 8 GB unified memory.
+- `birdnet==1.1.1` is pinned in `pyproject.toml` and all transitive packages are
+  locked. The current official package supports LiteRT on macOS ARM64 with
+  Python 3.11–3.13. We use the BirdNET 2.4 FP16 TFLite model through LiteRT,
+  avoiding the full TensorFlow dependency and reducing the model from about
+  52 MB FP32 to about 26 MB FP16.
+- Model acquisition remains in `scripts/prefetch_models.py`. Runtime validates
+  exact model size plus all 27 label files before importing BirdNET, sets
+  `BIRDNET_APP_DATA` to `models/birdnet`, and fails with an offline instruction
+  if assets are incomplete.
+- A curated 24-species Maharashtra/India list uses exact BirdNET 2.4 labels.
+  The default threshold is 0.25 and is configurable. At 0.10 the public test set
+  recovered its weak Common Myna label but ranked Common Tailorbird above it;
+  0.25 is the more conservative default.
+- BirdNET detections are sensor evidence only. The service logs them to SQLite,
+  moves `active → verifying`, and passes typed evidence to the existing Python
+  state machine. BirdNET never writes state or awards XP.
+- BirdNET source is MIT licensed. Its models are CC BY-NC-SA 4.0; commercial
+  distribution or use requires a separate licensing review.
+
+Official sources checked: the current [BirdNET Python package README][birdnet]
+and [BirdNET-Analyzer installation guide][birdnet-install].
+
+[birdnet]: https://github.com/birdnet-team/birdnet
+[birdnet-install]: https://birdnet-team.github.io/BirdNET-Analyzer/stable/installation.html

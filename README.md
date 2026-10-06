@@ -82,3 +82,24 @@ hurt” are detected before LLM intent parsing: the active quest ends and the ap
 instructs the user to stop, stay put away from edges/water, and use the phone's
 emergency call. Wild Quest explicitly does not present itself as an emergency
 system.
+
+## Phase 4 bird-call quests
+
+Bird calls use BirdNET 2.4 FP16 through LiteRT on Apple Silicon. Model download
+is part of prefetch; field inference has no network fallback.
+
+```sh
+make bird-prefetch       # online at home: download model + labels
+make bird-testset        # online: attributed public acceptance clips
+make bird-bench          # offline accuracy/latency report
+make bird-run TRAIL=sinhagad  # offline 12-second microphone quest
+```
+
+The default confidence threshold is `0.25`; override it with
+`WILDQUEST_BIRD_CONFIDENCE`. Detections, segment times, confidence, threshold,
+and inference latency are written to SQLite. BirdNET supplies typed sensor
+evidence, but only the Python state machine can complete the quest.
+
+See `docs/BIRDNET.md` before field use. A detection is a likely machine
+identification, not proof, and the model must never justify approaching birds,
+nests, water, edges, or leaving the trail.

@@ -1,0 +1,25 @@
+# Curated common Maharashtra/India species; exact BirdNET 2.4 en_us labels.
+Acridotheres tristis_Common Myna
+Alcedo atthis_Common Kingfisher
+Amaurornis phoenicurus_White-breasted Waterhen
+Ardeola grayii_Indian Pond-Heron
+Argya striata_Jungle Babbler
+Centropus sinensis_Greater Coucal
+Cinnyris asiaticus_Purple Sunbird
+Columba livia_Rock Pigeon
+Copsychus saularis_Oriental Magpie-Robin
+Corvus splendens_House Crow
+Dendrocitta vagabunda_Rufous Treepie
+Dicrurus macrocercus_Black Drongo
+Eudynamys scolopaceus_Asian Koel
+Halcyon smyrnensis_White-throated Kingfisher
+Merops orientalis_Green Bee-eater
+Milvus migrans_Black Kite
+Orthotomus sutorius_Common Tailorbird
+Passer domesticus_House Sparrow
+Pavo cristatus_Indian Peafowl
+Prinia socialis_Ashy Prinia
+Psittacula krameri_Rose-ringed Parakeet
+Pycnonotus cafer_Red-vented Bulbul
+Streptopelia chinensis_Spotted Dove
+Vanellus indicus_Red-wattled Lapwing
