@@ -6,6 +6,7 @@ from __future__ import annotations
 import platform
 import shutil
 import subprocess
+from importlib.metadata import version as package_version
 from pathlib import Path
 
 
@@ -30,9 +31,9 @@ def main() -> None:
     whisper = ROOT / "vendor/whisper.cpp/build/bin/whisper-cli"
     print(f"whisper.cpp: {'ready' if whisper.exists() else 'models not prefetched'}")
     print("Piper: import verified")
+    print(f"BirdNET: {package_version('birdnet')} (LiteRT route)")
     import piper  # noqa: F401
 
 
 if __name__ == "__main__":
     main()
-

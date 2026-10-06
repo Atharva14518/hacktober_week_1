@@ -7,7 +7,11 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Iterator
+from typing import TYPE_CHECKING, Iterator
+
+if TYPE_CHECKING:
+    from wildquest.birds.models import BirdAnalysis
+    from wildquest.quests.engine import EngineSnapshot
 
 
 def _now() -> str:
@@ -27,6 +31,16 @@ class StoredRun:
 class PlayerProgress:
     xp: int
     streak: int
+
+
+@dataclass(frozen=True)
+class StoredBirdDetection:
+    label: str
+    scientific_name: str
+    common_name: str
+    confidence: float
+    start_s: float
+    end_s: float
 
 
 class QuestStore:
@@ -87,6 +101,38 @@ class QuestStore:
                     success INTEGER NOT NULL CHECK (success IN (0, 1)),
                     created_at TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS bird_analyses (
+                    id INTEGER PRIMARY KEY,
+                    run_id INTEGER NOT NULL REFERENCES quest_runs(id),
+                    audio_path TEXT NOT NULL,
+                    audio_duration_ms REAL NOT NULL CHECK (audio_duration_ms > 0),
+                    inference_ms REAL NOT NULL CHECK (inference_ms >= 0),
+                    confidence_threshold REAL NOT NULL CHECK (
+                        confidence_threshold >= 0 AND confidence_threshold <= 1
+                    ),
+                    created_at TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS bird_detections (
+                    id INTEGER PRIMARY KEY,
+                    analysis_id INTEGER NOT NULL REFERENCES bird_analyses(id),
+                    label TEXT NOT NULL,
+                    scientific_name TEXT NOT NULL,
+                    common_name TEXT NOT NULL,
+                    confidence REAL NOT NULL CHECK (confidence >= 0 AND confidence <= 1),
+                    start_ms REAL NOT NULL CHECK (start_ms >= 0),
+                    end_ms REAL NOT NULL CHECK (end_ms > start_ms)
+                );
+                CREATE TABLE IF NOT EXISTS bird_turn_latency (
+                    id INTEGER PRIMARY KEY,
+                    analysis_id INTEGER NOT NULL UNIQUE REFERENCES bird_analyses(id),
+                    record_ms REAL NOT NULL CHECK (record_ms >= 0),
+                    birdnet_ms REAL NOT NULL CHECK (birdnet_ms >= 0),
+                    tts_ms REAL NOT NULL CHECK (tts_ms >= 0),
+                    result_ready_ms REAL NOT NULL CHECK (result_ready_ms >= 0),
+                    created_at TEXT NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS idx_bird_detections_label
+                    ON bird_detections(label);
                 INSERT OR IGNORE INTO player_state (id) VALUES (1);
                 """
             )
@@ -202,3 +248,109 @@ class QuestStore:
                 ),
             )
 
+    def log_bird_analysis(
+        self, snapshot: EngineSnapshot, analysis: BirdAnalysis
+    ) -> int:
+        if snapshot.quest is None:
+            raise ValueError("bird analysis requires a quest run")
+        run = self.current_run()
+        if run is None or run.run_id <= 0 or run.quest_id != snapshot.quest.id:
+            raise RuntimeError("bird analysis run does not match current quest")
+        with self._connection() as connection:
+            cursor = connection.execute(
+                """
+                INSERT INTO bird_analyses (
+                    run_id, audio_path, audio_duration_ms, inference_ms,
+                    confidence_threshold, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    run.run_id,
+                    analysis.audio_path,
+                    round(analysis.audio_duration_s * 1000, 3),
+                    round(analysis.inference_s * 1000, 3),
+                    analysis.threshold,
+                    _now(),
+                ),
+            )
+            analysis_id = int(cursor.lastrowid)
+            connection.executemany(
+                """
+                INSERT INTO bird_detections (
+                    analysis_id, label, scientific_name, common_name,
+                    confidence, start_ms, end_ms
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    (
+                        analysis_id,
+                        detection.label,
+                        detection.scientific_name,
+                        detection.common_name,
+                        detection.confidence,
+                        round(detection.start_s * 1000, 3),
+                        round(detection.end_s * 1000, 3),
+                    )
+                    for detection in analysis.detections
+                ),
+            )
+        return analysis_id
+
+    def seen_bird_labels(self) -> set[str]:
+        with self._connection() as connection:
+            rows = connection.execute(
+                "SELECT DISTINCT label FROM bird_detections"
+            ).fetchall()
+        return {str(row["label"]) for row in rows}
+
+    def log_bird_turn_latency(
+        self,
+        analysis_id: int,
+        *,
+        record_s: float,
+        birdnet_s: float,
+        tts_s: float,
+        result_ready_s: float,
+    ) -> None:
+        values = (record_s, birdnet_s, tts_s, result_ready_s)
+        if any(value < 0 for value in values):
+            raise ValueError("bird turn latencies cannot be negative")
+        with self._connection() as connection:
+            connection.execute(
+                """
+                INSERT INTO bird_turn_latency (
+                    analysis_id, record_ms, birdnet_ms, tts_ms,
+                    result_ready_ms, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    analysis_id,
+                    round(record_s * 1000, 3),
+                    round(birdnet_s * 1000, 3),
+                    round(tts_s * 1000, 3),
+                    round(result_ready_s * 1000, 3),
+                    _now(),
+                ),
+            )
+
+    def bird_detections(self) -> tuple[StoredBirdDetection, ...]:
+        with self._connection() as connection:
+            rows = connection.execute(
+                """
+                SELECT label, scientific_name, common_name, confidence,
+                       start_ms, end_ms
+                FROM bird_detections
+                ORDER BY id
+                """
+            ).fetchall()
+        return tuple(
+            StoredBirdDetection(
+                label=str(row["label"]),
+                scientific_name=str(row["scientific_name"]),
+                common_name=str(row["common_name"]),
+                confidence=float(row["confidence"]),
+                start_s=float(row["start_ms"]) / 1000,
+                end_s=float(row["end_ms"]) / 1000,
+            )
+            for row in rows
+        )

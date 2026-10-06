@@ -1,0 +1,5 @@
+- quest_id: hear-common-myna
+  goal: target
+  target_label: Acridotheres tristis_Common Myna
+- quest_id: discover-new-bird
+  goal: any_new_species

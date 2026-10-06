@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import shutil
 import subprocess
 import urllib.request
@@ -30,6 +31,16 @@ KOKORO_FILES = {
 }
 
 
+def download_birdnet() -> None:
+    birdnet_dir = MODELS / "birdnet"
+    birdnet_dir.mkdir(parents=True, exist_ok=True)
+    os.environ["BIRDNET_APP_DATA"] = str(birdnet_dir.resolve())
+    import birdnet
+
+    birdnet.load("acoustic", "2.4", "tf", precision="fp16", library="litert")
+    print(f"BirdNET 2.4 FP16 LiteRT assets ready: {birdnet_dir}")
+
+
 def run(*args: str, cwd: Path | None = None) -> None:
     print("+", " ".join(args), flush=True)
     subprocess.run(args, cwd=cwd, check=True)
@@ -50,11 +61,15 @@ def download_kokoro() -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--kokoro-only", action="store_true")
+    parser.add_argument("--birdnet-only", action="store_true")
     args = parser.parse_args()
     MODELS.mkdir(exist_ok=True)
     VENDOR.mkdir(exist_ok=True)
     if args.kokoro_only:
         download_kokoro()
+        return
+    if args.birdnet_only:
+        download_birdnet()
         return
 
     ollama = shutil.which("ollama")
@@ -90,7 +105,8 @@ def main() -> None:
         PIPER_VOICE,
     )
     download_kokoro()
-    print("All Phase 0 assets are local. Network can now be disabled.")
+    download_birdnet()
+    print("All Wild Quest model assets are local. Network can now be disabled.")
 
 
 if __name__ == "__main__":

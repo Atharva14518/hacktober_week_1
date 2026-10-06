@@ -1,0 +1,9 @@
+id: hear-common-myna
+type: bird
+difficulty: moderate
+duration_min: 3
+requires: [daylight, marked_trail, quiet, low_wind]
+prompt_seed: From a safe stationary place on the marked trail, listen for a Common Myna without approaching or calling to any bird.
+success_criteria: BirdNET detects the configured Common Myna label above the confidence threshold in the recorded clip.
+hint: Stay still and listen for varied whistles, chattering, or harsh notes; never imitate the call to lure a bird.
+safety_notes: Remain on the trail and away from nests, water, edges, and wildlife; a detector result is not certain.

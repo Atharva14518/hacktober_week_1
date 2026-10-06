@@ -1,0 +1,9 @@
+id: discover-new-bird
+type: bird
+difficulty: moderate
+duration_min: 3
+requires: [daylight, marked_trail, quiet, low_wind]
+prompt_seed: Pause at a safe stationary point and listen for a bird species Wild Quest has not detected earlier on this device.
+success_criteria: BirdNET detects a listed species not present in prior SQLite detection history above the confidence threshold.
+hint: Wait quietly for a clear call; do not leave the trail, play recordings, or move closer to wildlife.
+safety_notes: Remain stationary on the marked trail and never approach, feed, touch, or deliberately disturb a bird or nest.

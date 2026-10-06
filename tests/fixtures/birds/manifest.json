@@ -1,0 +1,44 @@
+{
+  "clips": [
+    {
+      "filename": "common_myna.ogg",
+      "commons_title": "CommonMynaCalls.ogg",
+      "expected_label": "Acridotheres tristis_Common Myna",
+      "author": "L. Shyamal",
+      "license": "CC BY-SA 2.5",
+      "source_page": "https://commons.wikimedia.org/wiki/File:CommonMynaCalls.ogg",
+      "sha256": "a8381e579a1f581603e3f78b73ed7264dc2cbc503c042693642a7c63fba9bc13",
+      "bytes": 116003
+    },
+    {
+      "filename": "asian_koel.ogg",
+      "commons_title": "Asian Koel.ogg",
+      "expected_label": "Eudynamys scolopaceus_Asian Koel",
+      "author": "Philip Eapen",
+      "license": "CC BY-SA 4.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Asian_Koel.ogg",
+      "sha256": "e88e306b778d3cb688aab0630e4e738e36dba6d80399a7632df78ac4967d85f7",
+      "bytes": 65516
+    },
+    {
+      "filename": "house_crow.ogg",
+      "commons_title": "Corvus splendens.ogg",
+      "expected_label": "Corvus splendens_House Crow",
+      "author": "Vladimir Yu. Arkhipov",
+      "license": "CC BY-SA 3.0",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Corvus_splendens.ogg",
+      "sha256": "28cd23fe31a1e6e9f1c53f378a9515d66426b1fb5521628d3800b417d2b9bf00",
+      "bytes": 348044
+    },
+    {
+      "filename": "red_wattled_lapwing.ogg",
+      "commons_title": "Redwattled Lapwing.ogg",
+      "expected_label": "Vanellus indicus_Red-wattled Lapwing",
+      "author": "Gypsypkd",
+      "license": "Public domain",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Redwattled_Lapwing.ogg",
+      "sha256": "a6b17ab5fb1b8e64a9d0e81bc7cbf9875f61754ef478a76f14028e5aefd33889",
+      "bytes": 273543
+    }
+  ]
+}
