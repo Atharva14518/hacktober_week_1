@@ -1,0 +1,9 @@
+id: bird-call-count
+type: bird
+difficulty: easy
+duration_min: 4
+requires: [daylight, marked_trail, quiet]
+prompt_seed: Listen for distinct bird-call patterns without trying to approach the birds.
+success_criteria: Count at least two distinct call patterns or report honestly that only one was heard.
+hint: Notice rhythm and pitch rather than guessing a species.
+safety_notes: Never follow, feed, call to, touch, or disturb birds or nests.

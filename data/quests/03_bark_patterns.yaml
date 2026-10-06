@@ -1,0 +1,9 @@
+id: bark-patterns
+type: observe
+difficulty: easy
+duration_min: 4
+requires: [daylight, marked_trail, good_visibility]
+prompt_seed: Compare the visible bark patterns of two trees from the trail.
+success_criteria: Describe one visible difference in line, patch, or color pattern between two trees.
+hint: Look for smooth, cracked, striped, or patchy appearances without approaching.
+safety_notes: Observe only from the trail and never touch or peel bark.

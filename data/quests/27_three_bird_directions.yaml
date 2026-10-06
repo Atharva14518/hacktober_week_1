@@ -1,0 +1,9 @@
+id: three-bird-directions
+type: bird
+difficulty: challenging
+duration_min: 7
+requires: [daylight, marked_trail, quiet, wide_trail]
+prompt_seed: Map bird sounds by direction while staying still on a wide marked trail.
+success_criteria: Report calls from up to three directions, allowing fewer if that is all you hear.
+hint: Face forward and label sounds left, right, ahead, behind, or above.
+safety_notes: Do not move toward calls, imitate them, use playback, or disturb wildlife.

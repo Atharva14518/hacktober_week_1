@@ -1,0 +1,9 @@
+id: root-step-awareness
+type: move
+difficulty: challenging
+duration_min: 4
+requires: [daylight, dry, marked_trail, good_visibility, wide_trail]
+prompt_seed: Cross a short rooty section of marked trail using deliberate, balanced steps.
+success_criteria: Traverse only the safe visible section and report the number of deliberate steps used.
+hint: Keep hands free, slow down, and place each foot on stable trail surface.
+safety_notes: Skip if roots are wet, steep, loose, narrow, or near an edge; never use vegetation as a handhold.

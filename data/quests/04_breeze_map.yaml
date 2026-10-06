@@ -1,0 +1,9 @@
+id: breeze-map
+type: observe
+difficulty: easy
+duration_min: 3
+requires: [daylight, marked_trail, low_wind]
+prompt_seed: Watch how a gentle breeze moves leaves at three different heights.
+success_criteria: Identify movement at low, middle, and high vegetation levels from a safe position.
+hint: Use only what is already visible and keep your feet on the marked trail.
+safety_notes: Skip in strong wind or near falling branches; do not reach for vegetation.

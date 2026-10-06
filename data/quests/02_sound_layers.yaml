@@ -1,0 +1,9 @@
+id: sound-layers
+type: listen
+difficulty: easy
+duration_min: 3
+requires: [daylight, marked_trail, quiet]
+prompt_seed: Listen for one nearby sound, one middle-distance sound, and one far sound.
+success_criteria: Report three sounds and classify each as near, middle-distance, or far.
+hint: Pause on a safe wide part of the trail and listen in one direction at a time.
+safety_notes: Stand still on the marked trail where other hikers can pass safely.

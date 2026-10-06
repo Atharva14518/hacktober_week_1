@@ -1,0 +1,9 @@
+id: marker-memory
+type: find
+difficulty: moderate
+duration_min: 5
+requires: [daylight, marked_trail, good_visibility]
+prompt_seed: Find an official trail marker and remember its shape, color, and direction.
+success_criteria: Report the marker shape, color, and indicated direction from the marked route.
+hint: Search only for installed signs or painted official blazes already visible on route.
+safety_notes: Do not follow unofficial markings or leave the current marked trail.

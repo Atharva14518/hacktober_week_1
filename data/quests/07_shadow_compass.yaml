@@ -1,0 +1,9 @@
+id: shadow-compass
+type: observe
+difficulty: moderate
+duration_min: 5
+requires: [daylight, dry, marked_trail, good_visibility]
+prompt_seed: Compare the direction of three shadows and infer where the brightest sky lies.
+success_criteria: Report a shared shadow direction and point out the brighter side of the sky.
+hint: Use shadows already crossing the trail; no precise compass direction is required.
+safety_notes: Stay on dry, level trail and never stare directly at the sun.

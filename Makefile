@@ -1,4 +1,4 @@
-.PHONY: setup test run bench prefetch
+.PHONY: setup test run bench prefetch quest-smoke
 
 PYTHON := uv run --locked python
 
@@ -14,6 +14,9 @@ test:
 
 run:
 	$(PYTHON) scripts/smoke_test.py
+
+quest-smoke:
+	$(PYTHON) scripts/quest_smoke.py
 
 bench:
 	$(PYTHON) scripts/bench_stt.py

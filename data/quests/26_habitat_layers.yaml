@@ -1,0 +1,9 @@
+id: habitat-layers
+type: observe
+difficulty: challenging
+duration_min: 6
+requires: [daylight, marked_trail, good_visibility]
+prompt_seed: Identify ground, shrub, and canopy habitat layers using only distant observation.
+success_criteria: Describe one visible feature in each of three habitat layers.
+hint: Scan vertically from trail surface to low plants to high branches.
+safety_notes: Observe without touching, collecting, feeding, or approaching any living thing.

@@ -1,0 +1,9 @@
+id: leaf-shapes
+type: find
+difficulty: easy
+duration_min: 4
+requires: [daylight, marked_trail, good_visibility]
+prompt_seed: Find three different leaf silhouettes that are visible without leaving the trail.
+success_criteria: Describe three visible leaf shapes without collecting or touching them.
+hint: Search with your eyes across shrubs, fallen leaves, and canopy edges.
+safety_notes: Do not pick up, taste, or touch any plant material.

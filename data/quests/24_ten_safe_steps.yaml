@@ -1,0 +1,9 @@
+id: ten-safe-steps
+type: move
+difficulty: easy
+duration_min: 2
+requires: [daylight, dry, marked_trail, level_ground, wide_trail]
+prompt_seed: Take ten unusually slow steps while noticing balance and foot placement.
+success_criteria: Complete ten controlled steps on a clear, level, wide marked trail.
+hint: Keep eyes mostly ahead and use peripheral vision for foot placement.
+safety_notes: Skip around people, obstacles, slopes, poor visibility, wet ground, edges, or water.

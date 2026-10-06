@@ -1,0 +1,9 @@
+id: distant-landmark
+type: find
+difficulty: moderate
+duration_min: 5
+requires: [daylight, marked_trail, good_visibility, level_ground]
+prompt_seed: From a safe level viewpoint on the trail, choose one distant landmark and note three details.
+success_criteria: Name the landmark and three visible details such as shape, color, or relative position.
+hint: A ridge, building, large tree, or cloud formation can be a landmark.
+safety_notes: Use only an established viewpoint away from edges and water; never seek a better off-trail angle.

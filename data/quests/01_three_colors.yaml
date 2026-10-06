@@ -1,0 +1,9 @@
+id: three-colors
+type: observe
+difficulty: easy
+duration_min: 3
+requires: [daylight, marked_trail, good_visibility]
+prompt_seed: Notice three different natural colors visible from the marked trail.
+success_criteria: Name three distinct colors and what safe, distant feature showed each one.
+hint: Look from the ground layer to the canopy without leaving the trail.
+safety_notes: Observe at a distance; do not touch plants, animals, or unknown objects.
