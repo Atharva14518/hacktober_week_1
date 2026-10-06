@@ -1,0 +1,9 @@
+id: quiet-minute
+type: silence
+difficulty: easy
+duration_min: 2
+requires: [daylight, marked_trail, quiet, wide_trail]
+prompt_seed: Keep one full minute of silence and notice how the soundscape changes.
+success_criteria: Complete the timer and recall one sound noticed near the beginning and one near the end.
+hint: Settle at the side of a wide marked trail without blocking anyone.
+safety_notes: Remain aware of people and trail traffic; stop immediately if the location feels unsafe.

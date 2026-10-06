@@ -1,0 +1,9 @@
+id: trail-texture-bands
+type: observe
+difficulty: moderate
+duration_min: 4
+requires: [daylight, dry, marked_trail, good_visibility]
+prompt_seed: Study how the marked trail surface changes across three visible sections ahead.
+success_criteria: Describe three trail-surface textures without stepping off the established path.
+hint: Look for packed earth, gravel, roots, or leaf cover from your current safe position.
+safety_notes: Do not test loose ground with your feet; avoid wet, unstable, or steep sections.

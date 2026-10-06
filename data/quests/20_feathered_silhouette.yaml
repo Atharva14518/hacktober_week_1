@@ -1,0 +1,9 @@
+id: feathered-silhouette
+type: bird
+difficulty: moderate
+duration_min: 5
+requires: [daylight, marked_trail, good_visibility, quiet]
+prompt_seed: If a bird is already visible, study its silhouette and movement from far away.
+success_criteria: Describe body shape and one movement, or report that no bird appeared during the timer.
+hint: Look at open sky and distant branches without approaching or identifying the species.
+safety_notes: Do not follow, feed, photograph closely, play calls, or disturb birds.

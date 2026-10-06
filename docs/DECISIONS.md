@@ -46,3 +46,34 @@ Piper and Kokoro use CPU ONNX Runtime wheels.
 [whisper]: https://github.com/ggml-org/whisper.cpp
 [piper]: https://github.com/OHF-Voice/piper1-gpl
 [kokoro]: https://github.com/thewh1teagle/kokoro-onnx
+
+## 2026-10-07 — Phase 2 quest engine
+
+- Quest files are loaded with `yaml.safe_load` and validated by
+  `pydantic==2.13.5`; unknown fields and invalid enum values fail closed.
+  `pyyaml==6.0.3` and Pydantic are exact direct pins, with transitive versions in
+  `uv.lock`. Both provide native Apple Silicon-compatible wheels for Python 3.11.
+- SQLite plus the Python state machine are authoritative. The database stores
+  the current run, optimistic version, every transition, XP, streak, and LLM
+  timings. Reopening the database reconstructs the last persisted state.
+- An LLM `done` intent means only “the user claims to be done” and transitions
+  `active → verifying`. Completion requires a separate strict
+  `VerificationEvidence` whose source is limited to timer, sensor, photo
+  metadata, or application-level user confirmation.
+- XP is 10/20/30 for easy/moderate/challenging quests, plus two XP per existing
+  streak step capped at five. Completion increments streak; skip/end resets it.
+- Intent output is exactly `{"intent": <enum>}` with extra fields forbidden.
+  Parsing retries once, then applies an offline keyword fallback. Narrator text
+  has no state authority and passes through code-level unsafe-language override.
+- Safety gating is independent of prompts. All quests require daylight and a
+  marked trail; global rules also block offers off-trail, near edges, near water,
+  or after dark. Quest-specific conditions such as dry ground and visibility are
+  checked before an offer.
+
+Official sources checked before dependency installation: [Pydantic JSON
+validation][pydantic-json], [Pydantic package releases][pydantic-pypi], and the
+[PyYAML project guidance][pyyaml] recommending `safe_load` for untrusted input.
+
+[pydantic-json]: https://docs.pydantic.dev/latest/concepts/json/
+[pydantic-pypi]: https://pypi.org/project/pydantic/
+[pyyaml]: https://github.com/yaml/pyyaml/blob/main/README.md

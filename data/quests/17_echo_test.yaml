@@ -1,0 +1,9 @@
+id: soft-echo
+type: listen
+difficulty: moderate
+duration_min: 3
+requires: [daylight, marked_trail, quiet, wide_trail]
+prompt_seed: Make one quiet hand clap and listen for reflection or absorption in the landscape.
+success_criteria: Report whether the clap sounded reflected, quickly absorbed, or unclear.
+hint: Try only once so wildlife and other hikers are not disturbed.
+safety_notes: Skip near wildlife, nesting areas, groups, or any place where noise is discouraged.

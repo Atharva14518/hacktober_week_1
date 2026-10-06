@@ -1,0 +1,9 @@
+id: temperature-zones
+type: observe
+difficulty: moderate
+duration_min: 6
+requires: [daylight, dry, marked_trail, low_wind]
+prompt_seed: Notice whether two marked-trail sections feel warmer or cooler as sunlight and shade change.
+success_criteria: Compare the felt temperature of two safe trail sections without leaving the route.
+hint: Notice sun and shade on your clothing rather than touching surfaces.
+safety_notes: Stay on the trail, avoid heat stress, and turn back if conditions become uncomfortable.

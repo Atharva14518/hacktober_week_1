@@ -1,0 +1,9 @@
+id: level-stride-count
+type: move
+difficulty: easy
+duration_min: 3
+requires: [daylight, dry, marked_trail, level_ground, wide_trail]
+prompt_seed: Walk thirty relaxed strides on a level, wide section of marked trail.
+success_criteria: Count thirty comfortable strides while remaining fully on the marked trail.
+hint: Count one through ten three times and keep your normal pace.
+safety_notes: Do not attempt on slopes, narrow paths, crowds, wet ground, or near hazards.

@@ -1,0 +1,9 @@
+id: rock-without-touch
+type: observe
+difficulty: easy
+duration_min: 3
+requires: [daylight, marked_trail, good_visibility]
+prompt_seed: Examine a rock from a distance and imagine its texture using only visual clues.
+success_criteria: Describe two visual clues and the texture they suggest.
+hint: Notice highlights, cracks, grain size, and rounded or sharp-looking forms.
+safety_notes: Do not climb, move, sit on, or touch rocks; remain on the marked trail.

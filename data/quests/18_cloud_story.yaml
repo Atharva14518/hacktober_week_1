@@ -1,0 +1,9 @@
+id: cloud-story
+type: observe
+difficulty: easy
+duration_min: 4
+requires: [daylight, marked_trail, good_visibility, level_ground]
+prompt_seed: Stop safely and trace one cloud shape as it changes above the trail.
+success_criteria: Describe the cloud's first shape and one visible change.
+hint: Watch from level ground and return your gaze to the trail before moving.
+safety_notes: Never walk while looking upward and stop if weather is worsening.

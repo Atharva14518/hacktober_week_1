@@ -1,0 +1,9 @@
+id: gentle-incline-rhythm
+type: move
+difficulty: moderate
+duration_min: 5
+requires: [daylight, dry, marked_trail, good_visibility, wide_trail]
+prompt_seed: On a gentle marked-trail incline, walk slowly and notice how your breathing rhythm changes.
+success_criteria: Complete five safe minutes and report whether breathing became faster, slower, or unchanged.
+hint: Shorten your stride and choose a pace at which you can speak comfortably.
+safety_notes: Only use a gentle wide incline; stop for pain, dizziness, breathlessness, or unstable footing.

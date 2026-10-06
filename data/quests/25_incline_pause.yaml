@@ -1,0 +1,9 @@
+id: incline-pause
+type: silence
+difficulty: challenging
+duration_min: 4
+requires: [daylight, dry, marked_trail, good_visibility, wide_trail]
+prompt_seed: After a gentle climb, pause silently in a safe wide area and notice recovery.
+success_criteria: Complete a two-minute stationary recovery and report one change in breathing or heartbeat.
+hint: Stand or sit only at an established safe rest point that does not block the trail.
+safety_notes: Stop the quest for pain, dizziness, or breathlessness; never rest near an edge or on a narrow trail.

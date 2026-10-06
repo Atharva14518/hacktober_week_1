@@ -1,0 +1,9 @@
+id: canopy-windows
+type: find
+difficulty: easy
+duration_min: 3
+requires: [daylight, marked_trail, good_visibility]
+prompt_seed: Find two windows of open sky framed by the canopy from the marked trail.
+success_criteria: Describe the shape of two separate visible patches of sky.
+hint: Look upward only after stopping in a safe, unobstructed place.
+safety_notes: Stop walking before looking up and remain clear of trail traffic.

@@ -1,0 +1,9 @@
+id: gratitude-pause
+type: silence
+difficulty: easy
+duration_min: 3
+requires: [daylight, marked_trail, level_ground, wide_trail]
+prompt_seed: Pause quietly and choose one harmless distant detail you appreciate about this place.
+success_criteria: Complete the quiet timer and describe one appreciated detail without collecting it.
+hint: It can be a sound, color, shape, breeze, or patch of light.
+safety_notes: Remain in a safe established spot and leave every natural object untouched.

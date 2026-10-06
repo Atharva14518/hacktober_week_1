@@ -1,0 +1,9 @@
+id: natural-symmetry
+type: find
+difficulty: moderate
+duration_min: 5
+requires: [daylight, marked_trail, good_visibility]
+prompt_seed: Find two examples of approximate symmetry visible from the trail.
+success_criteria: Describe two symmetrical forms and where their imagined center lines lie.
+hint: Consider leaves, branching forms, distant flowers, or reflected shapes without approaching.
+safety_notes: Look only; never touch plants or animals and remain on the marked trail.

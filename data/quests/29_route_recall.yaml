@@ -1,0 +1,9 @@
+id: route-recall
+type: observe
+difficulty: challenging
+duration_min: 5
+requires: [daylight, dry, marked_trail, good_visibility]
+prompt_seed: Recall the last three official route features you passed while continuing only on the marked trail.
+success_criteria: Name three route features in reverse order without retracing or leaving the route.
+hint: Think of signs, bends, benches, gates, or surface changes.
+safety_notes: Do not walk backward, retrace for proof, or rely on unofficial markers.

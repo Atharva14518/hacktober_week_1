@@ -1,0 +1,9 @@
+id: distant-texture-photo
+type: photo
+difficulty: moderate
+duration_min: 4
+requires: [daylight, dry, marked_trail, good_visibility, level_ground]
+prompt_seed: Photograph a distant natural texture while remaining stationary on the trail.
+success_criteria: Capture one image of a distant pattern without touching or approaching its subject.
+hint: Bark patterns, canopy layers, and rock faces can be framed from where you stand.
+safety_notes: Never photograph while walking or approach plants, animals, edges, or water for the shot.

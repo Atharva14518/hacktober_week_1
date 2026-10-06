@@ -1,0 +1,9 @@
+id: switchback-shapes
+type: observe
+difficulty: moderate
+duration_min: 5
+requires: [daylight, dry, marked_trail, good_visibility]
+prompt_seed: From the trail, notice how a visible bend or switchback fits the terrain.
+success_criteria: Describe one safe visible bend and the slope or obstacle it goes around.
+hint: Observe the trail engineering without walking toward any edge for a better view.
+safety_notes: Never approach an edge or shortcut a switchback; skip if the bend is not safely visible.

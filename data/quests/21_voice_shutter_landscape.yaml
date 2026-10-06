@@ -1,0 +1,9 @@
+id: voice-shutter-landscape
+type: photo
+difficulty: easy
+duration_min: 3
+requires: [daylight, dry, marked_trail, good_visibility, level_ground]
+prompt_seed: While stopped safely, take one landscape photo using a voice shutter if available.
+success_criteria: Confirm one photo was taken while stationary without changing position for framing.
+hint: Frame what is already visible; the quest works even if you choose to skip the photo.
+safety_notes: Stop on level ground, keep awareness of others, and never move toward an edge, water, or wildlife.
