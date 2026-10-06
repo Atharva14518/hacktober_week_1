@@ -50,3 +50,35 @@ make quest-smoke   # scripted conversation using local Qwen on Ollama loopback
 
 `quest-smoke` writes its test state and per-call LLM timings to
 `artifacts/phase2-smoke.db`. Runtime model output never connects to a remote URL.
+
+## Phase 3 place awareness
+
+Build location packs at home while online. The only network client for this
+feature is `scripts/prefetch_location.py`; context building, adaptation, and
+safety use local files and pure Python.
+
+```sh
+make prefetch-location TRAIL=sinhagad
+make prefetch-location TRAIL=tamhini
+make prefetch-location TRAIL=pashan-lake
+```
+
+Each pack contains a GPX snapshot of mapped walking ways, named OSM POIs,
+elevation samples, seven days of sunrise/sunset and forecast data, and curated
+safety notes. GPX ways are map data, not a verified or recommended route; signs,
+closures, and local guidance always take precedence. Forecast-derived context
+is marked stale when its nearest hourly sample is more than 90 minutes away.
+
+After prefetching, disconnect Wi-Fi and run:
+
+```sh
+make place-demo TRAIL=sinhagad
+uv run --locked python scripts/place_demo.py sinhagad --rain --tired
+```
+
+The deterministic adaptation engine shortens, eases, swaps, or ends quests for
+rain, fatigue, low daylight, slow pace, and hard hazards. “I’m lost” and “I’m
+hurt” are detected before LLM intent parsing: the active quest ends and the app
+instructs the user to stop, stay put away from edges/water, and use the phone's
+emergency call. Wild Quest explicitly does not present itself as an emergency
+system.

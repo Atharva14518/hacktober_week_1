@@ -130,3 +130,34 @@ def test_tired_and_stop_end_the_quest(tmp_path: Path, intent: str) -> None:
         engine, IntentParser(FakeGenerator([f'{{"intent":"{intent}"}}']))
     )
     assert conversation.handle(intent).snapshot.state is QuestState.ENDED
+
+
+def test_lost_incident_bypasses_llm_and_ends_active_quest(tmp_path: Path) -> None:
+    engine = QuestEngine(QUESTS, QuestStore(tmp_path / "lost.db"))
+    engine.offer(
+        "three-colors",
+        PlaceContext(
+            place_name="Test Trail", daylight=True, dry=True, on_marked_trail=True
+        ),
+        "local_guide",
+    )
+    engine.accept()
+    conversation = QuestConversation(engine, IntentParser(FakeGenerator([])))
+
+    result = conversation.handle("I am lost and cannot find the trail")
+
+    assert result.intent is Intent.STOP
+    assert result.snapshot.state is QuestState.ENDED
+    assert "Stop moving and stay put" in result.spoken_reply
+    assert "not an emergency system" in result.spoken_reply
+    assert "emergency call" in result.spoken_reply
+
+
+def test_hurt_incident_has_calm_emergency_guidance(tmp_path: Path) -> None:
+    engine = QuestEngine(QUESTS, QuestStore(tmp_path / "hurt.db"))
+    conversation = QuestConversation(engine, IntentParser(FakeGenerator([])))
+
+    result = conversation.handle("I fell and I am hurt")
+
+    assert result.snapshot.state is QuestState.IDLE
+    assert "away from edges and water" in result.spoken_reply

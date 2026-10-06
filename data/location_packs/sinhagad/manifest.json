@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "slug": "sinhagad",
+  "name": "Sinhagad Fort",
+  "latitude": 18.3663,
+  "longitude": 73.7559,
+  "bbox": [
+    18.337,
+    73.729,
+    18.392,
+    73.782
+  ],
+  "timezone": "Asia/Kolkata",
+  "fetched_at": "2026-10-06T20:08:06+00:00",
+  "attribution": [
+    "© OpenStreetMap contributors, ODbL",
+    "Weather data by Open-Meteo",
+    "Elevation data: Copernicus DEM via Open-Meteo"
+  ]
+}

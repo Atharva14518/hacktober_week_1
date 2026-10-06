@@ -1,4 +1,4 @@
-.PHONY: setup test run bench prefetch quest-smoke
+.PHONY: setup test run bench prefetch prefetch-location quest-smoke place-demo
 
 PYTHON := uv run --locked python
 
@@ -9,6 +9,11 @@ setup:
 prefetch:
 	$(PYTHON) scripts/prefetch_models.py
 
+TRAIL ?= sinhagad
+
+prefetch-location:
+	$(PYTHON) scripts/prefetch_location.py $(TRAIL)
+
 test:
 	uv run --locked pytest
 
@@ -17,6 +22,9 @@ run:
 
 quest-smoke:
 	$(PYTHON) scripts/quest_smoke.py
+
+place-demo:
+	$(PYTHON) scripts/place_demo.py $(TRAIL)
 
 bench:
 	$(PYTHON) scripts/bench_stt.py

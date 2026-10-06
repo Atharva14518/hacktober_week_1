@@ -1,0 +1,60 @@
+{
+  "pois": [
+    {
+      "name": "Sutarwadi Auto Rickshaw Stand",
+      "category": "amenity:parking",
+      "latitude": 18.541424740000004,
+      "longitude": 73.77958912,
+      "osm_type": "way",
+      "osm_id": 395902065
+    },
+    {
+      "name": "Buddha Statue",
+      "category": "historic:monument",
+      "latitude": 18.5442399,
+      "longitude": 73.7740402,
+      "osm_type": "node",
+      "osm_id": 3997118331
+    },
+    {
+      "name": "Sutarwadi Hill",
+      "category": "natural:peak",
+      "latitude": 18.5386986,
+      "longitude": 73.7772259,
+      "osm_type": "node",
+      "osm_id": 1065055134
+    },
+    {
+      "name": "Lavale Hills",
+      "category": "natural:wood",
+      "latitude": 18.539875810332124,
+      "longitude": 73.73928159594095,
+      "osm_type": "way",
+      "osm_id": 91658840
+    },
+    {
+      "name": "Pashan Lake Island",
+      "category": "natural:wood",
+      "latitude": 18.531704668181813,
+      "longitude": 73.78672762272728,
+      "osm_type": "way",
+      "osm_id": 207832298
+    },
+    {
+      "name": "Pashan Lake Island",
+      "category": "natural:wood",
+      "latitude": 18.532274543478266,
+      "longitude": 73.78514297971013,
+      "osm_type": "way",
+      "osm_id": 207832299
+    },
+    {
+      "name": "Sutarwadi Hill",
+      "category": "natural:wood",
+      "latitude": 18.542174596296295,
+      "longitude": 73.77374647777776,
+      "osm_type": "way",
+      "osm_id": 86918953
+    }
+  ]
+}

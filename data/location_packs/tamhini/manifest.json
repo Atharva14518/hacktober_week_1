@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "slug": "tamhini",
+  "name": "Tamhini Ghat",
+  "latitude": 18.481,
+  "longitude": 73.417,
+  "bbox": [
+    18.445,
+    73.38,
+    18.505,
+    73.455
+  ],
+  "timezone": "Asia/Kolkata",
+  "fetched_at": "2026-10-06T20:08:15+00:00",
+  "attribution": [
+    "© OpenStreetMap contributors, ODbL",
+    "Weather data by Open-Meteo",
+    "Elevation data: Copernicus DEM via Open-Meteo"
+  ]
+}
