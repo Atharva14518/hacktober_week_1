@@ -1,0 +1,60 @@
+{
+  "pois": [
+    {
+      "name": "Sinhagad Parking",
+      "category": "amenity:parking",
+      "latitude": 18.364646133333334,
+      "longitude": 73.76128149166665,
+      "osm_type": "way",
+      "osm_id": 126399697
+    },
+    {
+      "name": "Sinhagad Fort",
+      "category": "historic:castle",
+      "latitude": 18.3648336244186,
+      "longitude": 73.75479899302326,
+      "osm_type": "way",
+      "osm_id": 126392859
+    },
+    {
+      "name": "Sinhagad",
+      "category": "natural:peak",
+      "latitude": 18.3651861,
+      "longitude": 73.7549869,
+      "osm_type": "node",
+      "osm_id": 1065082306
+    },
+    {
+      "name": "Sinhagad Fort",
+      "category": "tourism:attraction",
+      "latitude": 18.3651456,
+      "longitude": 73.7552242,
+      "osm_type": "node",
+      "osm_id": 2165009895
+    },
+    {
+      "name": "Kalyan Gate",
+      "category": "tourism:viewpoint",
+      "latitude": 18.3625613,
+      "longitude": 73.7538176,
+      "osm_type": "node",
+      "osm_id": 3721058066
+    },
+    {
+      "name": "Pune Gate",
+      "category": "tourism:viewpoint",
+      "latitude": 18.3655651,
+      "longitude": 73.7592159,
+      "osm_type": "node",
+      "osm_id": 3721058067
+    },
+    {
+      "name": "Sinhagad Valley",
+      "category": "tourism:viewpoint",
+      "latitude": 18.3773169,
+      "longitude": 73.7688583,
+      "osm_type": "node",
+      "osm_id": 6917411981
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "pois": [
+    {
+      "name": "Garudmaachi",
+      "category": "historic:fort",
+      "latitude": 18.4505054,
+      "longitude": 73.4118258,
+      "osm_type": "node",
+      "osm_id": 9197028052
+    },
+    {
+      "name": "Phadai Dongar",
+      "category": "natural:peak",
+      "latitude": 18.5036015,
+      "longitude": 73.4157085,
+      "osm_type": "node",
+      "osm_id": 10738822460
+    },
+    {
+      "name": "Ponda",
+      "category": "natural:peak",
+      "latitude": 18.4781641,
+      "longitude": 73.425343,
+      "osm_type": "node",
+      "osm_id": 10738822459
+    },
+    {
+      "name": "Tamhini Valley",
+      "category": "natural:wood",
+      "latitude": 18.526979892292488,
+      "longitude": 73.43475820553367,
+      "osm_type": "way",
+      "osm_id": 91710341
+    },
+    {
+      "name": "Thamini Valley",
+      "category": "natural:wood",
+      "latitude": 18.4906680625,
+      "longitude": 73.3854683375,
+      "osm_type": "way",
+      "osm_id": 128543801
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "slug": "pashan-lake",
+  "name": "Pashan Lake",
+  "latitude": 18.536,
+  "longitude": 73.786,
+  "bbox": [
+    18.525,
+    73.772,
+    18.546,
+    73.8
+  ],
+  "timezone": "Asia/Kolkata",
+  "fetched_at": "2026-10-06T20:08:22+00:00",
+  "attribution": [
+    "© OpenStreetMap contributors, ODbL",
+    "Weather data by Open-Meteo",
+    "Elevation data: Copernicus DEM via Open-Meteo"
+  ]
+}

@@ -77,3 +77,37 @@ validation][pydantic-json], [Pydantic package releases][pydantic-pypi], and the
 [pydantic-json]: https://docs.pydantic.dev/latest/concepts/json/
 [pydantic-pypi]: https://pypi.org/project/pydantic/
 [pyyaml]: https://github.com/yaml/pyyaml/blob/main/README.md
+
+## 2026-10-07 — Phase 3 place awareness and adaptation
+
+- Location acquisition is confined to `scripts/prefetch_location.py`. It uses
+  Python's standard library, so Phase 3 adds no dependency or Apple Silicon
+  compatibility burden. Runtime modules do not import HTTP clients.
+- Each pack is complete only when its manifest, GPX, POIs, elevation,
+  sunrise/sunset, forecast, and curated notes files exist. Loading fails closed
+  if any are missing. The GPX contains nearby OSM walking ways and is labelled
+  as map data, not a verified route.
+- OpenStreetMap data is fetched through Overpass QL with explicit bounding
+  boxes and `out geom`. Open-Meteo supplies the seven-day hourly forecast,
+  local sunrise/sunset values, and elevation samples. Packs preserve the
+  required OpenStreetMap, Open-Meteo, and Copernicus DEM attribution.
+- Context construction is filesystem-only and deterministic. User-reported rain
+  overrides a dry forecast; user-reported fatigue and pace are preserved. A
+  nearest forecast sample more than 90 minutes away is marked stale.
+- Adaptation has no LLM dependency. At ten minutes of daylight or less it ends
+  questing; under 45 minutes it limits duration and swaps movement/photo tasks;
+  rain removes dry-ground, movement, and photo tasks; fatigue selects an easy
+  stationary task; slow pace shortens movement. The existing safety guard gets
+  the final decision and can force a swap or end.
+- Lost/hurt keywords are evaluated before intent parsing. The deterministic
+  response ends an active quest and says to stop, stay put somewhere safe away
+  from edges/water, use the phone's emergency call, and that Wild Quest is not
+  an emergency system.
+
+Official sources checked before implementation: the [Overpass QL language
+guide][overpass], [Open-Meteo forecast API][openmeteo-forecast], and
+[Open-Meteo elevation API][openmeteo-elevation].
+
+[overpass]: https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL
+[openmeteo-forecast]: https://open-meteo.com/en/docs
+[openmeteo-elevation]: https://open-meteo.com/en/docs/elevation-api
