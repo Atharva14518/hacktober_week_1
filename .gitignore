@@ -1,0 +1,10 @@
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+artifacts/
+models/
+vendor/
+data/*.db
+data/*.db-*

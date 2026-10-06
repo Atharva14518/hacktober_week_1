@@ -1,0 +1,2 @@
+"""Wild Quest operational scripts."""
+
