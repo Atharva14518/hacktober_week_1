@@ -12,6 +12,7 @@ from typing import TYPE_CHECKING, Iterator
 if TYPE_CHECKING:
     from wildquest.birds.models import BirdAnalysis
     from wildquest.quests.engine import EngineSnapshot
+    from wildquest.vision.models import VisionAnalysis
 
 
 def _now() -> str:
@@ -131,8 +132,27 @@ class QuestStore:
                     result_ready_ms REAL NOT NULL CHECK (result_ready_ms >= 0),
                     created_at TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS vision_analyses (
+                    id INTEGER PRIMARY KEY,
+                    run_id INTEGER NOT NULL REFERENCES quest_runs(id),
+                    image_path TEXT NOT NULL,
+                    target TEXT NOT NULL,
+                    model TEXT NOT NULL,
+                    answer TEXT NOT NULL CHECK (answer IN ('yes', 'no')),
+                    confidence REAL NOT NULL CHECK (confidence >= 0 AND confidence <= 1),
+                    threshold REAL NOT NULL CHECK (threshold >= 0 AND threshold <= 1),
+                    parse_valid INTEGER NOT NULL CHECK (parse_valid IN (0, 1)),
+                    attempts INTEGER NOT NULL CHECK (attempts BETWEEN 1 AND 2),
+                    accepted INTEGER NOT NULL CHECK (accepted IN (0, 1)),
+                    error TEXT,
+                    first_token_ms REAL NOT NULL CHECK (first_token_ms >= 0),
+                    total_ms REAL NOT NULL CHECK (total_ms >= 0),
+                    created_at TEXT NOT NULL
+                );
                 CREATE INDEX IF NOT EXISTS idx_bird_detections_label
                     ON bird_detections(label);
+                CREATE INDEX IF NOT EXISTS idx_vision_analyses_run
+                    ON vision_analyses(run_id);
                 INSERT OR IGNORE INTO player_state (id) VALUES (1);
                 """
             )
@@ -354,3 +374,61 @@ class QuestStore:
             )
             for row in rows
         )
+
+    def log_vision_analysis(
+        self,
+        snapshot: EngineSnapshot,
+        analysis: VisionAnalysis,
+        threshold: float,
+        *,
+        accepted: bool,
+    ) -> int:
+        if snapshot.quest is None:
+            raise ValueError("vision analysis requires a quest run")
+        run = self.current_run()
+        if run is None or run.quest_id != snapshot.quest.id:
+            raise RuntimeError("vision analysis run does not match current quest")
+        with self._connection() as connection:
+            cursor = connection.execute(
+                """
+                INSERT INTO vision_analyses (
+                    run_id, image_path, target, model, answer, confidence,
+                    threshold, parse_valid, attempts, accepted, error,
+                    first_token_ms, total_ms, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    run.run_id,
+                    analysis.image_path,
+                    analysis.target,
+                    analysis.model,
+                    analysis.answer.answer,
+                    analysis.answer.confidence,
+                    threshold,
+                    int(analysis.parse_valid),
+                    analysis.attempts,
+                    int(accepted),
+                    analysis.error,
+                    round(analysis.first_token_s * 1000, 3),
+                    round(analysis.total_s * 1000, 3),
+                    _now(),
+                ),
+            )
+        return int(cursor.lastrowid)
+
+    def has_failed_vision_attempt(self, snapshot: EngineSnapshot) -> bool:
+        if snapshot.quest is None:
+            return False
+        run = self.current_run()
+        if run is None or run.quest_id != snapshot.quest.id:
+            return False
+        with self._connection() as connection:
+            row = connection.execute(
+                """
+                SELECT 1 FROM vision_analyses
+                WHERE run_id = ? AND accepted = 0
+                ORDER BY id DESC LIMIT 1
+                """,
+                (run.run_id,),
+            ).fetchone()
+        return row is not None

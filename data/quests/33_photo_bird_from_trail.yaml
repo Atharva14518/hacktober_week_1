@@ -1,0 +1,9 @@
+id: photo-bird-from-trail
+type: photo
+difficulty: easy
+duration_min: 3
+requires: [daylight, marked_trail, good_visibility, level_ground]
+prompt_seed: While stopped on the marked trail, photograph a bird that is already visible from your position.
+success_criteria: A photo visibly shows a bird without the player approaching or disturbing it.
+hint: Use zoom from where you are; if no bird is visible, skip this quest or say trust me after trying.
+safety_notes: Stay still on level trail, keep your distance, and never approach wildlife, nests, water, or edges.

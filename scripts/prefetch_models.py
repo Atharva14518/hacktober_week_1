@@ -17,6 +17,7 @@ WHISPER = VENDOR / "whisper.cpp"
 MODELS = ROOT / "models"
 WHISPER_VERSION = "v1.9.4"
 LLMS = ("qwen2.5:3b-instruct", "gemma3:4b-it-q4_K_M")
+VISION_MODELS = ("qwen2.5vl:3b", "moondream:1.8b")
 WHISPER_MODELS = ("base", "small")
 PIPER_VOICE = "en_US-lessac-medium"
 KOKORO_FILES = {
@@ -62,6 +63,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--kokoro-only", action="store_true")
     parser.add_argument("--birdnet-only", action="store_true")
+    parser.add_argument("--vision-only", action="store_true")
     args = parser.parse_args()
     MODELS.mkdir(exist_ok=True)
     VENDOR.mkdir(exist_ok=True)
@@ -75,7 +77,13 @@ def main() -> None:
     ollama = shutil.which("ollama")
     if ollama is None:
         raise SystemExit("Ollama is not installed; follow the official macOS installer.")
+    if args.vision_only:
+        for model in VISION_MODELS:
+            run(ollama, "pull", model)
+        return
     for model in LLMS:
+        run(ollama, "pull", model)
+    for model in VISION_MODELS:
         run(ollama, "pull", model)
 
     if not WHISPER.exists():

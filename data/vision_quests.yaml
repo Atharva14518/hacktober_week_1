@@ -1,0 +1,6 @@
+- quest_id: photo-bird-from-trail
+  target: a bird
+  confidence_threshold: 0.80
+- quest_id: photo-trail-marker
+  target: a trail marker or trail sign
+  confidence_threshold: 0.85

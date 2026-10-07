@@ -139,3 +139,54 @@ and [BirdNET-Analyzer installation guide][birdnet-install].
 
 [birdnet]: https://github.com/birdnet-team/birdnet
 [birdnet-install]: https://birdnet-team.github.io/BirdNET-Analyzer/stable/installation.html
+
+## 2026-10-07 — Phase 5 vision route
+
+- Hardware was rechecked before selection: Apple M2, 8 CPU cores, and 8 GB
+  unified memory. We retain Ollama rather than add MLX-VLM because Ollama is
+  already installed, supports Metal and multimodal inputs on this Mac, and
+  avoids a second model runtime and dependency graph.
+- The measured candidates are `qwen2.5vl:3b` (3.2 GB, Q4_K_M, Apache-2.0)
+  and `moondream:1.8b` (1.7 GB). Moondream is faster but returned the same
+  conservative `no/0.8` for all 20 acceptance images under the required JSON
+  schema, so it is not selected. Qwen is the default because it correctly
+  separated the clear bird/non-bird development set and followed the schema.
+- The alternative MLX-VLM project is MIT licensed and optimized for Apple
+  Silicon, but adding it would duplicate Ollama's weights/runtime for no
+  demonstrated acceptance benefit on this 8 GB machine. It remains a future
+  benchmark option, not a Phase 5 runtime dependency.
+- The REST adapter is hard-coded to `127.0.0.1`; images are base64 data in the
+  local request. Ollama receives a Pydantic-generated JSON schema, temperature
+  zero, and a small token limit. Responses are strict-validated, retried once,
+  then replaced with a safe `no/0.0` result.
+- Model confidence is treated only as one conservative gate, not calibrated
+  probability. The application requires both `answer=yes` and the quest's
+  threshold (0.80 bird, 0.85 marker). Any failure leaves the quest active.
+  Explicit “trust me” is application-owned user confirmation available only
+  after a logged failed attempt; the model cannot invoke it.
+- Image uploads use `fastapi==0.142.2`, `uvicorn==0.53.0`,
+  `python-multipart==0.0.32`, and `pillow==12.3.0`, with all transitive versions
+  in `uv.lock`. These packages provide universal Python or macOS ARM64 wheels;
+  no Rosetta step is needed. Uploads require a one-session token, are capped at
+  10 MiB/25 megapixels, decoded rather than trusted by MIME alone, stripped of
+  metadata, resized, and stored under a generated filename.
+- Code rejects targets about eating, tasting, poisonousness, foraging, or
+  medicinal use before inference. This is independent of the prompt.
+
+Official sources checked before implementation: Ollama's [vision API][ollama-vision],
+[structured-output guide][ollama-structured], the official
+[Qwen2.5-VL model card][qwen-vl], [Moondream model card][moondream],
+[MLX-VLM README][mlx-vlm], FastAPI's [file-upload guide][fastapi-files], and
+the current package releases for [FastAPI][fastapi-pypi], [Uvicorn][uvicorn-pypi],
+[python-multipart][multipart-pypi], and [Pillow][pillow-pypi].
+
+[ollama-vision]: https://docs.ollama.com/capabilities/vision
+[ollama-structured]: https://docs.ollama.com/capabilities/structured-outputs
+[qwen-vl]: https://ollama.com/library/qwen2.5vl:3b
+[moondream]: https://ollama.com/library/moondream
+[mlx-vlm]: https://github.com/Blaizzy/mlx-vlm
+[fastapi-files]: https://fastapi.tiangolo.com/tutorial/request-files/
+[fastapi-pypi]: https://pypi.org/project/fastapi/0.142.2/
+[uvicorn-pypi]: https://pypi.org/project/uvicorn/0.53.0/
+[multipart-pypi]: https://pypi.org/project/python-multipart/0.0.32/
+[pillow-pypi]: https://pypi.org/project/pillow/12.3.0/

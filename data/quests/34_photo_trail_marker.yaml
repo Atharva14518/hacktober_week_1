@@ -1,0 +1,9 @@
+id: photo-trail-marker
+type: photo
+difficulty: easy
+duration_min: 2
+requires: [daylight, marked_trail, good_visibility, level_ground]
+prompt_seed: Stop safely and photograph a trail marker or trail sign already visible from the path.
+success_criteria: A photo visibly shows a trail marker or trail sign from the player's current safe position.
+hint: Frame a nearby official marker without leaving the path; skip if none is visible.
+safety_notes: Do not walk while photographing, leave the trail, climb, or move toward roads, water, or edges.

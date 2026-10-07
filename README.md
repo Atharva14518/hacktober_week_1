@@ -103,3 +103,32 @@ evidence, but only the Python state machine can complete the quest.
 See `docs/BIRDNET.md` before field use. A detection is a likely machine
 identification, not proof, and the model must never justify approaching birds,
 nests, water, edges, or leaving the trail.
+
+## Phase 5 vision quests
+
+Photo verification uses the local `qwen2.5vl:3b` Ollama model. The VLM returns
+strictly validated `{"answer":"yes|no","confidence":0..1}` JSON; an 0.80 or
+higher “yes” is required for the bird-photo quest. The VLM only supplies sensor
+evidence. SQLite and the Python state machine remain the only components that
+can award XP or complete a quest.
+
+```sh
+make vision-prefetch                  # online once: Qwen + comparison model
+make vision-testset                  # online once: 20 attributed public images
+make vision-bench                    # offline benchmark
+make photo-server                    # offline phone upload on local hotspot
+make vision-run TRAIL=sinhagad       # webcam photo, local VLM, spoken result
+uv run --locked python scripts/vision_quest.py --image artifacts/uploads/IMAGE.jpg
+```
+
+The upload server prints a one-session tokenized LAN URL. It accepts only
+JPEG/PNG/WebP up to 10 MiB, decodes and rewrites pixels to a fresh filename, and
+does not make outbound requests. Phone hotspot traffic is local networking, not
+internet access. For lab fixtures only, add `--lab --no-play`; field mode needs
+a prefetched location pack and live daylight/safety context.
+
+Low-confidence, negative, malformed, or unavailable model output fails closed
+and leaves the quest active. After a failed photo attempt, the player may say
+“trust me”; Python records that explicit human confirmation and completes the
+quest so the game cannot deadlock. Wild Quest never answers whether a plant or
+animal is edible, safe to taste, poisonous, or medicinal.
